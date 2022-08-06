@@ -186,7 +186,7 @@ const app = Vue.createApp({
           companyName: { en: 'South Dakota Mines'},
           jobTitle: { en: 'BS in Computer Science'},
           desc: {
-            en: 'Graduating from South Dakota Mines May 2022'
+            en: 'Graduated from South Dakota Mines May 2022'
           }
         }, {}, {}, {}
       ],
