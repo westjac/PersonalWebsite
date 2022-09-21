@@ -65,82 +65,46 @@ const app = Vue.createApp({
       // list of skills items to loop through it
       skillsItems: [
         {
-          imgUrl: 'https://via.placeholder.com/48',
+          imgUrl: '/assets/images/skills/html5.png',
           title: 'HTML5'
         }, {
-          imgUrl: 'https://via.placeholder.com/48',
+          imgUrl: '/assets/images/skills/css3.png',
           title: 'CSS3'
         }, {
-          imgUrl: 'https://via.placeholder.com/48',
+          imgUrl: '/assets/images/skills/javascript.png',
           title: 'JavaScript'
         }, {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'TypeScript'
-        }, {
-          imgUrl: 'https://via.placeholder.com/48',
+          imgUrl: '/assets/images/skills/jquery.png',
           title: 'jQuery'
         }, {
-          imgUrl: 'https://via.placeholder.com/48',
+          imgUrl: '/assets/images/skills/bootstrap.png',
           title: 'Bootstrap'
         }, {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'Angular'
-        }, {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'React'
-        }, {
-          imgUrl: 'https://via.placeholder.com/48',
+          imgUrl: '/assets/images/skills/vue.png',
           title: 'Vue'
-        }, {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'Firebase'
-        }, {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'PugJS'
-        }, {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'SASS'
         }
       ],
 
       // list of tools items to loop through it
       toolsItems: [
         {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'Ajax'
-        }, {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'Gulp'
-        }, {
-          imgUrl: 'https://via.placeholder.com/48',
+          imgUrl: '/assets/images/skills/WEBPACK.png',
           title: 'Webpack'
         }, {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'Git (Github)'
+          imgUrl: '/assets/images/skills/git.png',
+          title: 'Git (Github, Gitlab, Azure)'
         }, {
-          imgUrl: 'https://via.placeholder.com/48',
+          imgUrl: '/assets/images/skills/npm.png',
           title: 'Npm'
         }, {
-          imgUrl: 'https://via.placeholder.com/48',
+          imgUrl: '/assets/images/skills/command.png',
           title: 'Command Line'
         }, {
-          imgUrl: 'https://via.placeholder.com/48',
+          imgUrl: '/assets/images/skills/vs-code.png',
           title: 'VS Code'
         }, {
-          imgUrl: 'https://via.placeholder.com/48',
+          imgUrl: '/assets/images/skills/trello.png',
           title: 'Trello'
-        }, {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'ClickUp'
-        }, {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'Slack'
-        }, {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'Photoshop'
-        }, {
-          imgUrl: 'https://via.placeholder.com/48',
-          title: 'Adobe XD'
         }
       ],
 
