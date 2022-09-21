@@ -150,9 +150,16 @@ const app = Vue.createApp({
           companyName: { en: 'South Dakota Mines'},
           jobTitle: { en: 'BS in Computer Science'},
           desc: {
-            en: 'Graduating from South Dakota Mines May 2022'
+            en: 'Graduated from South Dakota Mines May 2022'
           }
-        }, {}, {}, {}
+        }, {
+          date: '2022',
+          companyName: { en: 'Omnitech Inc.'},
+          jobTitle: { en: 'Sales'},
+          desc: {
+            en: 'Sales Engineer working on business development at Omnitech since June 2022 in the Black Hills.'
+          }
+        }, {}, {}
       ],
 
       // current page of portfolio items

@@ -8,7 +8,7 @@
     <meta name="keywords" content="portfolio, agency, business, clean, company, corporate, creative, gallery, rtl, modern, photography, vue, vuejs, responsive, sass">
 
     <!-- title of the browser tab -->
-    <title>Nafie - HTML Portfolio Template</title>
+    <title>Jacob West Creative</title>
 
     <!-- favicon -->
     <link rel="icon" href="assets/favicon.ico">
@@ -16,7 +16,7 @@
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto&family=Saira+Stencil+One&text=Nafie&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto&family=Saira+Stencil+One&display=swap">
 
     <!-- css libraries file -->
     <link rel="stylesheet" href="styles/libraries.min.css">
@@ -56,8 +56,8 @@
         }">
           <div class="container">
             <!-- logo -->
-            <div class="logo" title="Nafie">
-              <h1><a href="index.html">Nafie</a></h1>
+            <div class="logo" title="Jacob West Creative">
+              <h1><a href="index.html">Jacob West Creative</a></h1>
             </div>
 
             <!-- nav links -->
@@ -66,14 +66,14 @@
               <!-- nav menu links -->
               <ul class="nav-links">
                 <li v-for="link in navLinks" :key="link.url">
-                  <a :href="link.url" @click="closeNavMenu">
+                  <a :href="'/index.html' + link.url" @click="closeNavMenu">
                     {{ link.title.en }}
                   </a>
                 </li>
               </ul>
 
-              <!-- menu content in big devices (hidden in mobile/tablet) -->
-              <div class="desktop-menu-content" tabindex="-1">
+               <!-- menu content in big devices (hidden in mobile/tablet) -->
+               <div class="desktop-menu-content" tabindex="-1">
                 <div class="container">
 
                   <!-- about us -->
@@ -91,25 +91,23 @@
                     <li class="col-lg-4">
                       <h4 class="block-title">Email</h4>
                       <ul>
-                        <li><a href="mailto:info@nafie.com">info@nafie.com</a></li>
-                        <li><a href="mailto:support@nafie.com">support@nafie.com</a></li>
+                        <li><a href="mailto:westjacob1@gmail.com">westjacob1@gmail.com</a></li>
                       </ul>
                     </li>
                     <li class="col-lg-4">
                       <h4 class="block-title">Address</h4>
                       <ul>
                         <li>
-                          941 saqrqorish Road, alandalos,
+                          Black Hills, South Dakota
                           <br>
-                          grnata, wa 47122-4194
+                          USA
                         </li>
                       </ul>
                     </li>
                     <li class="col-lg-4">
                       <h4 class="block-title">Phone</h4>
                       <ul>
-                        <li><a href="tel:02966202290">(02) 966 202 290</a></li>
-                        <li><a href="tel:02966202291">(02) 966 202 291</a></li>
+                        <li><a href="tel:016052093466">+1 605 209 3466</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -120,23 +118,6 @@
             <!-- options icons -->
             <ul class="options-icons">
 
-              <!-- lang switcher button -->
-              <li class="lang-switcher">
-                <ul class="lang-switcher-menu">
-                  <li class="menu-item menu-item-has-children">
-                    <a href="#">En</a>
-
-                    <ul class="sub-menu">
-                      <li class="menu-item">
-                        <a href="index.html">En</a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="rtl-index.html">ع</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
 
               <!-- theme switcher button -->
               <li class="theme-switcher">
@@ -165,9 +146,9 @@
             <div class="section-title">
               <span class="subtitle">{{ portfolioArchiveName }}</span>
               <h2 class="title">
-                The latest projects in
+                Projects in the
                 <br>
-                {{ portfolioArchiveName }} taxonomy
+                {{ portfolioArchiveName }} category
               </h2>
             </div>
 
