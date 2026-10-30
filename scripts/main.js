@@ -113,7 +113,7 @@ const app = Vue.createApp({
         {
           date: '2015',
           companyName: { en: 'Sturgis Photo & Gifts'},
-          jobTitle: { en: 'Grahpic Desginer'},
+          jobTitle: { en: 'Graphic Designer'},
           desc: {
             en: 'Setup and maintained a local network of over 40 devices. Implemented and oversaw ShopKeep sales transaction system with four registers.'
           }
@@ -127,7 +127,7 @@ const app = Vue.createApp({
         }, {
           date: '2017',
           companyName: { en: 'Monument Health'},
-          jobTitle: { en: 'Database Administation Job Shadow'},
+          jobTitle: { en: 'Database Administration Job Shadow'},
           desc: {
             en: 'Manipulated data on the hospital\'s SQL servers. Discussed how to fix data transition errors while moving to a new system.'
           }
@@ -155,11 +155,18 @@ const app = Vue.createApp({
         }, {
           date: '2022',
           companyName: { en: 'Omnitech Inc.'},
-          jobTitle: { en: 'Sales'},
+          jobTitle: { en: 'Sales Engineer'},
           desc: {
-            en: 'Sales Engineer working on business development at Omnitech since June 2022 in the Black Hills.'
+            en: 'Worked on business development as a Sales Engineer at Omnitech in the Black Hills.'
           }
-        }, {}, {}
+        }, {
+          date: 'Now',
+          companyName: { en: 'DelegateIQ'},
+          jobTitle: { en: 'Founder · AI Growth Partner'},
+          desc: {
+            en: 'Founded DelegateIQ, an AI automation firm in Rapid City, SD. I scope and build AI systems for businesses with Claude and n8n, and speak at AI events.'
+          }
+        }, {}
       ],
 
       // current page of portfolio items
@@ -184,7 +191,7 @@ const app = Vue.createApp({
           title: { en: 'Pat West for Sheriff'},
           date: { en: 'January 2018, 2022' },
           desc: {
-            en: 'The official campaign page for Pat West for Sheirff in Meade County, South Dakota.'
+            en: 'The official campaign page for Pat West for Sheriff in Meade County, South Dakota.'
           },
           category: 'Web',
           tools: ['HTML', 'Adobe Muse', 'Adobe Illustrator'],
