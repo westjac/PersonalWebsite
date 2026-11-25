@@ -908,7 +908,8 @@ const app = Vue.createApp({
 
       // send post request
       fetch(url, { method: 'POST', body: formData })
-        .then(res => res.text())
+        // treat any 2xx as success unless the endpoint explicitly answers "error" (works for the old PHP script and a webhook)
+        .then(res => res.text().then(text => (res.ok && text.trim() !== 'error') ? 'success' : 'error'))
         .then(data => {
           if (data === 'success') {
             // show success message
