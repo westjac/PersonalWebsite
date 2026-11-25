@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Jacob B. West</title>
-  <meta name="description" content="Jacob B. West builds AI systems that give people their time back. Founder of DelegateIQ in Rapid City, South Dakota, with roots in production, software, campaigns and business.">
+  <meta name="description" content="Jacob B. West is a people-first technology leader and founder of DelegateIQ in Rapid City, South Dakota. AI, campaigns, building and storytelling.">
   <meta name="theme-color" content="#000000">
   <link rel="icon" href="assets/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,385 +12,484 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
   <style>
     :root {
-      --bg: #000;
-      --fg: #f5f5f7;
-      --mute: #86868b;
-      --dim: #424245;
-      --line: rgba(255,255,255,.12);
+      --fg: #f5f5f7; --mute: #8e8e93; --dim: #48484a; --line: rgba(255,255,255,.14);
       --ease: cubic-bezier(.16,1,.3,1);
-      --gutter: clamp(20px, 5vw, 64px);
+      --pad: clamp(18px, 3.2vw, 40px);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--fg);
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
+    html, body { height: 100%; }
+    body { background: #000; color: var(--fg); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; overflow: hidden; }
     a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-    .mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
-    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    .mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
 
-    /* nav */
-    nav {
-      position: fixed; inset: 0 0 auto 0; z-index: 50; height: 56px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 var(--gutter);
-      background: rgba(0,0,0,.6); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid transparent; transition: border-color .4s;
-    }
-    nav.scrolled { border-color: var(--line); }
-    nav .brand { font-weight: 700; letter-spacing: -.01em; }
-    nav ul { list-style: none; display: flex; gap: 28px; font-size: 14px; color: var(--mute); }
-    nav ul a:hover { color: var(--fg); }
-    @media (max-width: 640px) { nav ul li:not(:last-child) { display: none; } }
+    #scene { position: fixed; inset: 0; display: block; width: 100%; height: 100%; touch-action: none; }
+    #labels { position: fixed; inset: 0; pointer-events: none; }
+    .lbl { position: absolute; left: 0; top: 0; white-space: nowrap; transition: opacity .5s; will-change: transform; }
+    .lbl.hub { pointer-events: auto; cursor: pointer; padding: 6px 0 6px 14px; }
+    .lbl.hub .n { display: block; }
+    .lbl.hub .t { display: block; font-size: 15px; font-weight: 600; letter-spacing: -.01em; color: var(--fg); margin-top: 2px; }
+    .lbl.hub::before { content: ""; position: absolute; left: 0; top: 50%; width: 6px; height: 1px; background: var(--mute); }
+    .lbl.hub:hover .t, .lbl.hub.hot .t { text-decoration: underline; text-underline-offset: 4px; }
+    .lbl.leaf { font-family: "JetBrains Mono", monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: #c7c7cc; padding-left: 10px; opacity: 0; }
+    .lbl.core { font-family: "JetBrains Mono", monospace; font-size: 10.5px; letter-spacing: .2em; color: var(--mute); transform-origin: center; }
 
-    /* hero */
-    .hero { min-height: 100svh; display: grid; place-items: center; text-align: center; position: relative; padding: 120px var(--gutter) 80px; overflow: hidden; }
-    .hero h1 { font-size: clamp(56px, 13vw, 200px); font-weight: 800; letter-spacing: -.055em; line-height: .9; }
-    .hero h1 .line { display: block; overflow: hidden; padding-bottom: .06em; }
-    .hero h1 .line span { display: inline-block; transform: translateY(105%); animation: rise 1.4s var(--ease) forwards; }
-    .hero h1 .line:nth-child(2) span { animation-delay: .12s; color: var(--mute); }
-    .hero p.lede { margin: 36px auto 0; max-width: 620px; font-size: clamp(19px, 2.2vw, 26px); font-weight: 500; color: var(--mute); opacity: 0; animation: fade 1.2s .7s var(--ease) forwards; }
-    .hero p.lede strong { color: var(--fg); font-weight: 600; }
-    .hero .meta { margin-top: 40px; opacity: 0; animation: fade 1.2s 1s var(--ease) forwards; }
-    .scroll-cue { position: absolute; bottom: 32px; left: 50%; width: 1px; height: 56px; background: linear-gradient(var(--fg), transparent); transform-origin: top; animation: cue 2.4s 1.4s var(--ease) infinite; opacity: .6; }
-    @keyframes rise { to { transform: translateY(0); } }
-    @keyframes fade { to { opacity: 1; } }
-    @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
-
-    /* statement */
-    .statement { padding: 18vh 0; }
-    .statement p { font-size: clamp(30px, 4.6vw, 64px); font-weight: 700; letter-spacing: -.035em; line-height: 1.08; max-width: 1100px; }
-    .statement p .w { color: var(--dim); transition: color .5s; }
-    .statement p .w.on { color: var(--fg); }
-
-    /* four disciplines (pinned) */
-    .quad { height: 460vh; position: relative; }
-    .quad .pin { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
-    .quad .pin > .wrap { width: 100%; }
-    .quad .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4vh; }
-    .quad .counter { font-variant-numeric: tabular-nums; }
-    .quad .stage { display: grid; }
-    .quad .word { grid-area: 1 / 1; font-size: clamp(52px, 14vw, 220px); font-weight: 800; letter-spacing: -.06em; line-height: .9; opacity: 0; transform: translateY(40px); transition: opacity .7s var(--ease), transform .9s var(--ease); white-space: nowrap; }
-    .quad .word.on { opacity: 1; transform: none; }
-    .quad .word.past { opacity: 0; transform: translateY(-40px); }
-    .quad .facts { display: grid; margin-top: 4vh; }
-    .quad .fact { grid-area: 1 / 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; opacity: 0; transition: opacity .6s var(--ease); pointer-events: none; }
-    .quad .fact.on { opacity: 1; pointer-events: auto; }
-    .quad .fact div { border-top: 1px solid var(--line); padding-top: 18px; }
-    .quad .fact h4 { font-size: 19px; font-weight: 600; margin-bottom: 6px; letter-spacing: -.01em; }
-    .quad .fact p { color: var(--mute); font-size: 15px; }
-    .quad .bar { height: 2px; background: var(--line); margin-top: 6vh; position: relative; }
-    .quad .bar i { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--fg); }
-    @media (max-width: 760px) {
-      .quad .fact { grid-template-columns: 1fr; gap: 14px; }
-    }
-
-    /* photo band */
-    .band { position: relative; height: 140vh; }
-    .band .pin { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; place-items: center; }
-    .band img { width: 100%; height: 100%; object-fit: cover; transform: scale(var(--s, 1.25)); filter: grayscale(.2) brightness(.55); will-change: transform; }
-    .band .cap { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 10vh; max-width: 760px; }
-    .band .cap h3 { font-size: clamp(30px, 4.4vw, 60px); font-weight: 700; letter-spacing: -.035em; line-height: 1.05; margin-top: 14px; }
-
-    /* sections */
-    section.block { padding: 16vh 0; border-top: 1px solid var(--line); }
-    .sec-head { display: flex; gap: 24px; align-items: baseline; justify-content: space-between; margin-bottom: 9vh; flex-wrap: wrap; }
-    .sec-head h2 { font-size: clamp(40px, 6.5vw, 96px); font-weight: 800; letter-spacing: -.05em; line-height: .95; }
-
-    /* timeline */
-    .tl { list-style: none; }
-    .tl li { display: grid; grid-template-columns: 160px 1fr 1.3fr; gap: 32px; padding: 30px 0; border-top: 1px solid var(--line); align-items: baseline; }
-    .tl li:last-child { border-bottom: 1px solid var(--line); }
-    .tl .yr { font-size: 15px; font-variant-numeric: tabular-nums; color: var(--mute); }
-    .tl h4 { font-size: clamp(20px, 2.2vw, 28px); font-weight: 600; letter-spacing: -.02em; line-height: 1.2; }
-    .tl h4 small { display: block; font-size: 15px; font-weight: 500; color: var(--mute); letter-spacing: 0; margin-top: 4px; }
-    .tl p { color: var(--mute); }
-    .tl .tag { display: inline-block; margin-top: 10px; }
-    @media (max-width: 760px) { .tl li { grid-template-columns: 1fr; gap: 8px; } }
-
-    /* work */
-    .work { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
-    .card { position: relative; border-radius: 22px; overflow: hidden; background: #111; min-height: 420px; display: flex; flex-direction: column; justify-content: flex-end; isolation: isolate; }
-    .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; transition: transform 1.2s var(--ease); }
-    .card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(transparent 35%, rgba(0,0,0,.85)); }
-    .card:hover img { transform: scale(1.04); }
-    .card .in { padding: 28px; }
-    .card h3 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 700; letter-spacing: -.025em; margin-top: 8px; line-height: 1.15; }
-    .card p { color: #c7c7cc; font-size: 15px; margin-top: 8px; max-width: 520px; }
-    .c-wide { grid-column: span 8; } .c-narrow { grid-column: span 4; } .c-half { grid-column: span 6; }
-    .card.text { background: #0b0b0c; border: 1px solid var(--line); }
-    .card.text::after { display: none; }
-    @media (max-width: 900px) { .c-wide, .c-narrow, .c-half { grid-column: span 12; } .card { min-height: 340px; } }
-
-    /* now */
-    .now { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; align-items: center; }
-    .now .portrait { position: relative; aspect-ratio: 643/900; max-width: 460px; justify-self: center; }
-    .now .portrait::before { content: ""; position: absolute; inset: 18% 4% 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.14), transparent); filter: blur(20px); }
-    .now .portrait img { position: relative; }
-    .now h3 { font-size: clamp(30px, 3.6vw, 48px); font-weight: 700; letter-spacing: -.035em; line-height: 1.08; }
-    .now p { color: var(--mute); margin-top: 22px; font-size: 19px; }
-    .now p a { color: var(--fg); border-bottom: 1px solid var(--dim); }
-    @media (max-width: 860px) { .now { grid-template-columns: 1fr; } }
-
-    /* contact */
-    .contact { text-align: center; padding: 22vh 0 18vh; border-top: 1px solid var(--line); }
-    .contact h2 { font-size: clamp(48px, 10vw, 150px); font-weight: 800; letter-spacing: -.055em; line-height: .92; }
-    .contact h2 span { color: var(--mute); }
-    .btns { display: flex; gap: 14px; justify-content: center; margin-top: 48px; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; border-radius: 999px; font-weight: 600; font-size: 16px; transition: transform .4s var(--ease), background .3s; }
+    /* HUD */
+    .hud { position: fixed; z-index: 5; pointer-events: none; }
+    .hud > * { pointer-events: auto; }
+    .tl { top: var(--pad); left: var(--pad); }
+    .tl .who { font-weight: 700; font-size: 15px; letter-spacing: -.01em; }
+    .tl .role { margin-top: 2px; }
+    .tr { top: var(--pad); right: var(--pad); text-align: right; }
+    .tr div + div { margin-top: 4px; }
+    .tr .live::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #30d158; margin-right: 8px; vertical-align: 1px; animation: pulse 2.4s infinite; }
+    @keyframes pulse { 50% { opacity: .25; } }
+    .bl { left: var(--pad); bottom: var(--pad); max-width: 560px; }
+    .bl h1 { font-size: clamp(30px, 4.4vw, 60px); font-weight: 800; letter-spacing: -.045em; line-height: 1.02; }
+    .bl h1 span { color: var(--mute); }
+    .bl p { margin-top: 16px; color: var(--mute); font-size: clamp(15px, 1.3vw, 18px); max-width: 470px; }
+    .bl .cta { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 999px; font-weight: 600; font-size: 14px; transition: transform .4s var(--ease), background .3s, color .3s; }
     .btn.solid { background: var(--fg); color: #000; }
     .btn.ghost { border: 1px solid var(--dim); }
     .btn:hover { transform: translateY(-2px); }
-    .btn.ghost:hover { background: rgba(255,255,255,.06); }
+    .br { right: var(--pad); bottom: var(--pad); }
+    .index { list-style: none; min-width: 250px; }
+    .index li + li { border-top: 1px solid var(--line); }
+    .index button { width: 100%; display: flex; gap: 16px; align-items: baseline; padding: 11px 0; text-align: left; font-size: 15px; font-weight: 500; color: #d1d1d6; transition: color .3s, padding .4s var(--ease); }
+    .index button .mono { min-width: 22px; }
+    .index button:hover, .index button.on { color: #fff; padding-left: 8px; }
+    .foot { position: fixed; z-index: 5; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; gap: 14px; }
+    .foot a { opacity: .35; } .foot a:hover { opacity: 1; }
 
-    footer { border-top: 1px solid var(--line); padding: 28px var(--gutter); display: flex; justify-content: space-between; color: var(--mute); font-size: 13px; flex-wrap: wrap; gap: 12px; }
-    footer a:hover { color: var(--fg); }
+    /* intro fade */
+    .hud, .foot, #labels { opacity: 0; transition: opacity 1.4s var(--ease); }
+    body.ready .hud, body.ready .foot, body.ready #labels { opacity: 1; }
+    body.focus .bl, body.focus .tr { opacity: 0; pointer-events: none; transition: opacity .5s; }
 
-    /* reveal */
-    .rv { opacity: 0; transform: translateY(36px); transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); }
-    .rv.in { opacity: 1; transform: none; }
-    .rv.d1 { transition-delay: .08s; } .rv.d2 { transition-delay: .16s; } .rv.d3 { transition-delay: .24s; }
+    /* detail panel */
+    .panel { position: fixed; z-index: 10; top: 0; right: 0; bottom: 0; width: min(560px, 100%); background: rgba(10,10,11,.86); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); border-left: 1px solid var(--line); transform: translateX(102%); transition: transform .9s var(--ease); overflow-y: auto; overscroll-behavior: contain; }
+    .panel.open { transform: none; }
+    .panel .bar { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; background: linear-gradient(rgba(10,10,11,.95), rgba(10,10,11,0)); z-index: 2; }
+    .panel .x { width: 36px; height: 36px; border-radius: 50%; background: #1c1c1e; display: grid; place-items: center; font-size: 14px; transition: background .3s; }
+    .panel .x:hover { background: #2c2c2e; }
+    .panel article { display: none; padding: 8px clamp(24px, 4vw, 44px) 60px; }
+    .panel article.on { display: block; }
+    .panel article > * { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .panel.open article.on > * { opacity: 1; transform: none; }
+    .panel.open article.on > *:nth-child(2) { transition-delay: .1s; } .panel.open article.on > *:nth-child(3) { transition-delay: .18s; } .panel.open article.on > *:nth-child(n+4) { transition-delay: .26s; }
+    .panel h2 { font-size: clamp(38px, 4.6vw, 56px); font-weight: 800; letter-spacing: -.05em; line-height: .98; margin-top: 10px; }
+    .panel .intro { font-size: 19px; color: var(--mute); margin-top: 20px; line-height: 1.45; }
+    .panel .intro strong { color: var(--fg); font-weight: 600; }
+    .panel h5 { margin: 44px 0 14px; }
+    .item { border-top: 1px solid var(--line); padding: 14px 0 16px; }
+    .item h4 { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+    .item p { color: var(--mute); margin-top: 4px; font-size: 15px; }
+    .spectrum { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+    .spectrum div { padding: 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .spectrum div:nth-child(2n) { border-right: 0; } .spectrum div:nth-child(n+3) { border-bottom: 0; }
+    .spectrum b { display: block; font-size: 15px; font-weight: 600; }
+    .spectrum span { display: block; color: var(--mute); font-size: 13px; margin-top: 3px; }
+    .archive { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .arc { border-radius: 14px; overflow: hidden; background: #161618; border: 1px solid var(--line); display: block; transition: border-color .3s; }
+    a.arc:hover { border-color: rgba(255,255,255,.3); }
+    .arc .img { aspect-ratio: 16/10; background: #1c1c1e center/cover no-repeat; display: grid; place-items: center; font-weight: 800; font-size: 26px; letter-spacing: -.04em; color: #48484a; }
+    .arc .t { padding: 10px 12px 12px; }
+    .arc b { display: block; font-size: 14px; font-weight: 600; }
+    .arc span { color: var(--mute); font-size: 12.5px; }
+    .contact-big { font-size: 22px; font-weight: 600; border-bottom: 1px solid var(--dim); }
 
+    /* small screens: HUD stacks, panel slides from bottom */
+    @media (max-width: 760px) {
+      .tr { display: none; }
+      .bl { right: var(--pad); bottom: auto; top: 96px; }
+      .bl p { display: none; }
+      .bl .cta { display: none; }
+      .br { left: var(--pad); }
+      .index { min-width: 0; background: rgba(0,0,0,.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line); border-radius: 16px; padding: 4px 16px; }
+      .foot { display: none; }
+      .panel { top: auto; height: 72svh; width: 100%; border-left: 0; border-top: 1px solid var(--line); border-radius: 22px 22px 0 0; transform: translateY(102%); }
+      .lbl.hub .t { font-size: 13px; }
+    }
+
+    .nogl #scene, .nogl #labels { display: none; }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; }
-      .hero h1 .line span { transform: none; }
-      .rv { opacity: 1; transform: none; }
-      .band img { transform: none; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <nav id="nav">
-    <a href="#top" class="brand">Jacob B. West</a>
-    <ul>
-      <li><a href="#disciplines">Disciplines</a></li>
-      <li><a href="#story">Story</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#contact">Contact</a></li>
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div id="labels" aria-hidden="true"></div>
+
+  <div class="hud tl">
+    <div class="who">Jacob B. West</div>
+    <div class="mono role">Founder · DelegateIQ</div>
+  </div>
+
+  <div class="hud tr mono">
+    <div class="live">Online</div>
+    <div>Rapid City, SD · <span id="clock">--:--</span></div>
+    <div>44.08° N &nbsp;103.23° W</div>
+  </div>
+
+  <div class="hud bl">
+    <h1>A people person<br><span>in the technology space.</span></h1>
+    <p>I lead businesses and teams through what AI makes possible, run campaigns from the server room to the street corner, and still build a lot of it myself.</p>
+    <div class="cta">
+      <button class="btn solid" data-open="ai">Start here</button>
+      <button class="btn ghost" data-open="contact">Contact</button>
+    </div>
+  </div>
+
+  <nav class="hud br" aria-label="Areas">
+    <ul class="index">
+      <li><button data-open="ai"><span class="mono">01</span>Leading with AI</button></li>
+      <li><button data-open="campaigns"><span class="mono">02</span>Campaigns</button></li>
+      <li><button data-open="building"><span class="mono">03</span>Building</button></li>
+      <li><button data-open="story"><span class="mono">04</span>Storytelling</button></li>
+      <li><button data-open="contact"><span class="mono">→</span>Contact</button></li>
     </ul>
   </nav>
 
-  <header class="hero" id="top">
-    <div>
-      <h1>
-        <span class="line"><span>Jacob</span></span>
-        <span class="line"><span>B. West</span></span>
-      </h1>
-      <p class="lede">I build AI systems that <strong>give people their time back.</strong></p>
-      <p class="meta mono">Founder, DelegateIQ &nbsp;·&nbsp; Rapid City, South Dakota</p>
-    </div>
-    <div class="scroll-cue" aria-hidden="true"></div>
-  </header>
+  <div class="foot mono"><a href="/2022/" title="The old site">©</a><a href="/sodak/" title="Where it started">·</a></div>
 
-  <section class="statement">
-    <div class="wrap">
-      <p id="statement">I've run sound and cameras at live events, written software for a living, built the digital side of political campaigns, and sold the work I build. Now I put all of it into one company.</p>
-    </div>
-  </section>
+  <aside class="panel" id="panel" role="dialog" aria-modal="false" aria-label="Details">
+    <div class="bar"><span class="mono" id="pcount">01 / 04</span><button class="x" id="pclose" aria-label="Close">✕</button></div>
 
-  <section class="quad" id="disciplines">
-    <div class="pin">
-      <div class="wrap">
-        <div class="head">
-          <span class="mono">Four disciplines</span>
-          <span class="mono counter"><span id="qn">01</span> / 04</span>
-        </div>
-        <div class="stage">
-          <div class="word on">Creative</div>
-          <div class="word">Technical</div>
-          <div class="word">Political</div>
-          <div class="word">Business</div>
-        </div>
-        <div class="facts">
-          <div class="fact on">
-            <div><h4>Sodak Entertainment</h4><p>My first business, out of Sturgis. DJ, photo and video for local events.</p></div>
-            <div><h4>Live production</h4><p>Lead technician at PowerHouse Dance DJs &amp; Sound, designing events around what clients needed.</p></div>
-            <div><h4>Five cameras and a drone</h4><p>Produced and livestreamed the Sturgis Brown 2020 graduation when COVID shut everything else down.</p></div>
-          </div>
-          <div class="fact">
-            <div><h4>Minecraft servers</h4><p>Where it started. Hosting, plugins, and charging players to cover the bill.</p></div>
-            <div><h4>Computer Science, SD Mines</h4><p>Graduated 2022. Software engineering at Omnitech in .NET, Azure and Vue along the way.</p></div>
-            <div><h4>Claude and n8n</h4><p>Today I still build the AI systems myself, from first workflow to production.</p></div>
-          </div>
-          <div class="fact">
-            <div><h4>Marty Jackley for Congress</h4><p>Ran the digital side of the 2026 campaign.</p></div>
-            <div><h4>Pat West for Sheriff</h4><p>Campaign site and creative for Meade County races in 2018 and 2022.</p></div>
-            <div><h4>Message under pressure</h4><p>Campaigns taught me to ship fast, on deadline, in front of everyone.</p></div>
-          </div>
-          <div class="fact">
-            <div><h4>DelegateIQ</h4><p>Founded an AI automation firm that helps businesses delegate the work that grinds them down.</p></div>
-            <div><h4>Sales engineering</h4><p>Learned at Omnitech that I like the room as much as the code.</p></div>
-            <div><h4>Speaking</h4><p>Talks on practical AI at events around the region.</p></div>
-          </div>
-        </div>
-        <div class="bar"><i id="qbar"></i></div>
+    <article data-id="ai">
+      <span class="mono">01 · Leadership</span>
+      <h2>Leading with AI</h2>
+      <p class="intro">I founded <strong>DelegateIQ</strong> on one idea: the best operators win by delegating. I find the work that grinds a team down, hand it to AI, and <strong>make sure the people come along.</strong></p>
+      <h5 class="mono">What that looks like</h5>
+      <div class="item"><h4>Strategy and scoping</h4><p>Sit with owners, map the week, decide what AI should and shouldn't touch, and price it honestly.</p></div>
+      <div class="item"><h4>Building</h4><p>Hands-on systems in Claude and n8n, from the first workflow to production.</p></div>
+      <div class="item"><h4>Adoption</h4><p>Client office hours and training, so the team actually uses what we built.</p></div>
+      <div class="item"><h4>Speaking</h4><p>Practical AI talks at events around the region.</p></div>
+    </article>
+
+    <article data-id="campaigns">
+      <span class="mono">02 · Politics</span>
+      <h2>Campaigns</h2>
+      <p class="intro">Campaigns test every skill at once, on deadline, in public. I've worked them <strong>from the server room to the street corner.</strong></p>
+      <h5 class="mono">The full spectrum</h5>
+      <div class="spectrum">
+        <div><b>Ops technology</b><span>Custom tools that run the campaign</span></div>
+        <div><b>Digital</b><span>Web, social and online strategy</span></div>
+        <div><b>Ads</b><span>Fully produced spots, concept to final cut</span></div>
+        <div><b>Ground game</b><span>Yard signs and phone banks</span></div>
       </div>
-    </div>
-  </section>
-
-  <section class="band" aria-label="Sturgis Brown 2020 graduation">
-    <div class="pin">
-      <img id="bandimg" src="assets/v2/grad2020.webp" alt="Sturgis Brown High School 2020 graduation graphic">
-      <div class="cap">
-        <span class="mono">May 2020 · Sturgis, SD</span>
-        <h3 class="rv">When the world shut down, we put a graduation on five cameras and the internet.</h3>
+      <h5 class="mono">Recent</h5>
+      <div class="item"><h4>Marty Jackley for Congress · 2026</h4><p>Ran digital for the campaign through Election Day.</p></div>
+      <div class="item"><h4>Pat West for Sheriff · 2018, 2022</h4><p>Campaign website and creative in Meade County.</p></div>
+      <h5 class="mono">From the archive</h5>
+      <div class="archive">
+        <div class="arc"><div class="img" style="background-image:url(assets/v2/sheriff.webp)"></div><div class="t"><b>West for Sheriff</b><span>Campaign branding</span></div></div>
       </div>
-    </div>
-  </section>
+    </article>
 
-  <section class="block" id="story">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 class="rv">The story<br>so far.</h2>
-        <span class="mono rv d1">Sturgis → Rapid City</span>
+    <article data-id="building">
+      <span class="mono">03 · Technology</span>
+      <h2>Building</h2>
+      <p class="intro">I learned servers because I wanted my own Minecraft world, then <strong>charged players to keep the lights on.</strong> I've been building things that pay for themselves ever since.</p>
+      <h5 class="mono">The path</h5>
+      <div class="item"><h4>Minecraft servers</h4><p>Hosting, plugins, uptime, and my first paying users.</p></div>
+      <div class="item"><h4>South Dakota Mines</h4><p>B.S. in Computer Science, 2022.</p></div>
+      <div class="item"><h4>Omnitech</h4><p>Software engineering in .NET, Azure, Vue and Blazor, then sales engineering.</p></div>
+      <div class="item"><h4>Today</h4><p>AI agents and automations in Claude and n8n, on a stack I run myself.</p></div>
+      <h5 class="mono">From the archive</h5>
+      <div class="archive">
+        <div class="arc"><div class="img" style="background-image:url(assets/v2/bhgear.webp)"></div><div class="t"><b>Black Hills Gear</b><span>E-commerce · 2016</span></div></div>
+        <div class="arc"><div class="img" style="background-image:url(assets/v2/bhbarrels.webp)"></div><div class="t"><b>Black Hills Barrels</b><span>E-commerce · 2022</span></div></div>
+        <a class="arc" href="/2022/"><div class="img">2022</div><div class="t"><b>The old site</b><span>As it was</span></div></a>
       </div>
-      <ol class="tl">
-        <li class="rv"><span class="yr">The beginning</span><h4>Minecraft servers<small>Self-taught</small></h4><p>I learned servers, plugins and uptime because I wanted my own world. Then I charged players to keep the lights on.<br><span class="mono tag">Technical</span></p></li>
-        <li class="rv"><span class="yr">Teens</span><h4>Sodak Entertainment<small>Founder, Sturgis</small></h4><p>DJ, photography and video for birthdays, dances and local events.<br><span class="mono tag">Creative · Business</span></p></li>
-        <li class="rv"><span class="yr">2015 to 2016</span><h4>Sturgis Photo &amp; Gifts, PowerHouse Dance DJs<small>Designer, lead technician</small></h4><p>Graphic design, a 40-device network, and event production for clients across the Black Hills.<br><span class="mono tag">Creative</span></p></li>
-        <li class="rv"><span class="yr">2018 to 2022</span><h4>South Dakota Mines<small>B.S. Computer Science</small></h4><p>Engineering by day, web and video work for local businesses on the side.<br><span class="mono tag">Technical</span></p></li>
-        <li class="rv"><span class="yr">2018 · 2022</span><h4>Pat West for Sheriff<small>Campaign creative</small></h4><p>Website and campaign creative for Meade County.<br><span class="mono tag">Political</span></p></li>
-        <li class="rv"><span class="yr">2020 to 2022+</span><h4>Omnitech<small>Software engineer, then sales engineer</small></h4><p>Shipped software in .NET, Azure and Vue, then moved to the business side to scope and sell it.<br><span class="mono tag">Technical · Business</span></p></li>
-        <li class="rv"><span class="yr">Now</span><h4>DelegateIQ<small>Founder · AI Growth Partner</small></h4><p>An AI automation firm in Rapid City. I scope, price and build the systems, and run client office hours.<br><span class="mono tag">Business · Technical</span></p></li>
-        <li class="rv"><span class="yr">2026</span><h4>Marty Jackley for Congress<small>Digital</small></h4><p>Ran digital for a statewide congressional campaign through Election Day.<br><span class="mono tag">Political</span></p></li>
-      </ol>
-    </div>
-  </section>
+    </article>
 
-  <section class="block" id="work">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 class="rv">Selected<br>work.</h2>
-        <span class="mono rv d1">2016 to now</span>
+    <article data-id="story">
+      <span class="mono">04 · Creative</span>
+      <h2>Storytelling</h2>
+      <p class="intro">Before code there were cameras, speakers and a lot of extension cords. Live production taught me to <strong>read a room and deliver with no second take.</strong></p>
+      <h5 class="mono">Highlights</h5>
+      <div class="item"><h4>SBHS 2020 Graduation</h4><p>When COVID cancelled everything, we produced it live: five angles, two announcers and a drone, on Facebook and YouTube.</p></div>
+      <div class="item"><h4>Campaign ads</h4><p>Fully produced political spots, from concept to final cut.</p></div>
+      <div class="item"><h4>PowerHouse Dance DJs &amp; Sound</h4><p>Lead technician, designing events around what clients needed.</p></div>
+      <h5 class="mono">From the archive</h5>
+      <div class="archive">
+        <div class="arc"><div class="img" style="background-image:url(assets/v2/grad2020.webp)"></div><div class="t"><b>SBHS Graduation</b><span>Live production · 2020</span></div></div>
+        <a class="arc" href="https://www.youtube.com/c/JacobWest" target="_blank" rel="noreferrer"><div class="img">▶</div><div class="t"><b>YouTube</b><span>Video over the years</span></div></a>
+        <a class="arc" href="/sodak/"><div class="img" style="font-size:20px">Sodak Ent.</div><div class="t"><b>Sodak Entertainment</b><span>First business, Sturgis</span></div></a>
       </div>
-      <div class="work">
-        <a class="card text c-wide rv" href="https://delegateiq.com" target="_blank" rel="noreferrer">
-          <div class="in">
-            <span class="mono">Company · Now</span>
-            <h3>DelegateIQ</h3>
-            <p>AI systems built in Claude and n8n for businesses that want their best people off the busywork.</p>
-          </div>
-        </a>
-        <div class="card c-narrow rv d1">
-          <img src="assets/v2/sheriff.webp" alt="Pat West for Sheriff campaign banner" loading="lazy">
-          <div class="in"><span class="mono">Campaign</span><h3>Pat West for Sheriff</h3></div>
-        </div>
-        <div class="card c-half rv">
-          <img src="assets/v2/grad2020.webp" alt="Sturgis Brown 2020 graduation" loading="lazy">
-          <div class="in"><span class="mono">Live production</span><h3>SBHS 2020 Graduation</h3><p>Five angles, two announcers, aerial drone, live on Facebook and YouTube.</p></div>
-        </div>
-        <div class="card c-half rv d1">
-          <img src="assets/v2/bhgear.webp" alt="Black Hills Gear product" loading="lazy">
-          <div class="in"><span class="mono">Web · E-commerce</span><h3>Black Hills Gear</h3></div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </article>
 
-  <section class="block" id="now">
-    <div class="wrap now">
-      <div class="portrait rv"><img src="assets/v2/jacob.webp" alt="Jacob B. West" loading="lazy"></div>
-      <div>
-        <span class="mono rv">Right now</span>
-        <h3 class="rv d1" style="margin-top:14px">The best operators win by delegating, not grinding.</h3>
-        <p class="rv d2">That's the idea behind <a href="https://delegateiq.com" target="_blank" rel="noreferrer">DelegateIQ</a>. I spend my days scoping AI systems with business owners, building them, and teaching teams to use them. I still live in the Black Hills, and I still love making things.</p>
-      </div>
-    </div>
-  </section>
+    <article data-id="contact">
+      <span class="mono">Contact</span>
+      <h2>Let's talk.</h2>
+      <p class="intro">Whether it's AI for your business, a campaign, or something that doesn't fit a box, <strong>I'd like to hear about it.</strong></p>
+      <h5 class="mono">Reach me</h5>
+      <div class="item"><a class="contact-big" href="mailto:westjacob1@gmail.com">westjacob1@gmail.com</a></div>
+      <div class="item"><a class="contact-big" href="https://www.linkedin.com/in/jacobbwest/" target="_blank" rel="noreferrer">LinkedIn</a></div>
+      <div class="item"><a class="contact-big" href="https://delegateiq.com" target="_blank" rel="noreferrer">DelegateIQ</a></div>
+    </article>
+  </aside>
 
-  <section class="contact" id="contact">
-    <div class="wrap">
-      <span class="mono rv">Contact</span>
-      <h2 class="rv d1" style="margin-top:18px">Let's build<br><span>something.</span></h2>
-      <div class="btns rv d2">
-        <a class="btn solid" href="mailto:westjacob1@gmail.com">Email me</a>
-        <a class="btn ghost" href="https://www.linkedin.com/in/jacobbwest/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="btn ghost" href="https://www.youtube.com/c/JacobWest" target="_blank" rel="noreferrer">YouTube</a>
-      </div>
-    </div>
-  </section>
+  <script type="module">
+    import * as THREE from './assets/v2/three.module.min.js';
 
-  <footer>
-    <span><a href="/2022/" title="The old site">&copy;</a> <span id="yr"></span> Jacob B. West</span>
-    <span>Black Hills, South Dakota <a href="/sodak/" title="Where it started" style="opacity:.35">·</a></span>
-  </footer>
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const $ = (s, el = document) => el.querySelector(s);
+    const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
-  <script>
-    (function () {
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      document.getElementById('yr').textContent = new Date().getFullYear();
+    // clock (Rapid City is Mountain Time)
+    const clock = $('#clock');
+    const fmt = new Intl.DateTimeFormat('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'America/Denver' });
+    const tickClock = () => clock.textContent = fmt.format(new Date()) + ' MT';
+    tickClock(); setInterval(tickClock, 15000);
 
-      // nav border on scroll
-      var nav = document.getElementById('nav');
+    // ---------- data ----------
+    const AREAS = [
+      { id: 'ai',        n: '01', t: 'Leading with AI', leaves: ['Strategy', 'Scoping', 'Claude', 'n8n', 'Office hours', 'Training', 'Speaking'] },
+      { id: 'campaigns', n: '02', t: 'Campaigns',       leaves: ['Ops tech', 'Digital', 'Ads', 'Phone banks', 'Yard signs', 'Jackley 2026', 'West for Sheriff'] },
+      { id: 'building',  n: '03', t: 'Building',        leaves: ['Minecraft', 'SD Mines CS', '.NET / Azure', 'Vue', 'Automation', 'Self-hosted'] },
+      { id: 'story',     n: '04', t: 'Storytelling',    leaves: ['Video', 'Live production', 'Drone', 'Photo', 'Sound', 'Design'] },
+    ];
 
-      // reveal on scroll
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-      }, { rootMargin: '0px 0px -10% 0px' });
-      document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+    // ---------- panel + routing (works with or without WebGL) ----------
+    const panel = $('#panel');
+    let current = null, onFocus = () => {};
+    function openArea(id, push = true) {
+      if (!$(`article[data-id="${id}"]`)) return;
+      $$('article', panel).forEach(a => a.classList.toggle('on', a.dataset.id === id));
+      const i = AREAS.findIndex(a => a.id === id);
+      $('#pcount').textContent = i >= 0 ? `${AREAS[i].n} / 04` : 'Contact';
+      $$('.index button').forEach(b => b.classList.toggle('on', b.dataset.open === id));
+      panel.scrollTop = 0;
+      panel.classList.add('open'); document.body.classList.add('focus');
+      current = id; onFocus(id);
+      if (push && location.hash !== '#' + id) history.pushState({}, '', '#' + id);
+    }
+    function closeArea(push = true) {
+      if (!current) return;
+      panel.classList.remove('open'); document.body.classList.remove('focus');
+      $$('.index button').forEach(b => b.classList.remove('on'));
+      current = null; onFocus(null);
+      if (push && location.hash) history.pushState({}, '', location.pathname);
+    }
+    $$('[data-open]').forEach(b => b.addEventListener('click', () => openArea(b.dataset.open)));
+    $('#pclose').addEventListener('click', () => closeArea());
+    addEventListener('keydown', e => { if (e.key === 'Escape') closeArea(); });
+    addEventListener('popstate', () => { const id = location.hash.slice(1); id ? openArea(id, false) : closeArea(false); });
 
-      // statement: words light up with scroll
-      var st = document.getElementById('statement');
-      st.innerHTML = st.textContent.split(' ').map(function (w) { return '<span class="w">' + w + '</span>'; }).join(' ');
-      var words = st.querySelectorAll('.w');
+    // ---------- WebGL scene ----------
+    const canvas = $('#scene');
+    let renderer;
+    try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false }); }
+    catch (e) { document.body.classList.add('nogl', 'ready'); }
 
-      // disciplines
-      var quad = document.getElementById('disciplines');
-      var qWords = quad.querySelectorAll('.word');
-      var qFacts = quad.querySelectorAll('.fact');
-      var qn = document.getElementById('qn');
-      var qbar = document.getElementById('qbar');
-      var current = 0;
+    if (renderer) {
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.setClearColor(0x000000, 1);
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x000000, 0.018);
+      const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 400);
+      const world = new THREE.Group(); scene.add(world);
+      const isSmall = () => innerWidth < 760;
 
-      // band
-      var band = document.querySelector('.band');
-      var bandImg = document.getElementById('bandimg');
+      // soft round point sprite
+      const dot = (() => {
+        const c = document.createElement('canvas'); c.width = c.height = 64;
+        const g = c.getContext('2d'); const r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+        r.addColorStop(0, 'rgba(255,255,255,1)'); r.addColorStop(.35, 'rgba(255,255,255,.9)'); r.addColorStop(1, 'rgba(255,255,255,0)');
+        g.fillStyle = r; g.fillRect(0, 0, 64, 64); return new THREE.CanvasTexture(c);
+      })();
 
-      function progress(el) {
-        var r = el.getBoundingClientRect();
-        var total = r.height - window.innerHeight;
-        return Math.min(1, Math.max(0, -r.top / (total || 1)));
-      }
-
-      function tick() {
-        nav.classList.toggle('scrolled', window.scrollY > 10);
-
-        // statement
-        var r = st.getBoundingClientRect();
-        var p = Math.min(1, Math.max(0, (window.innerHeight * .85 - r.top) / (r.height + window.innerHeight * .45)));
-        var lit = reduce ? words.length : Math.round(p * words.length);
-        words.forEach(function (w, i) { w.classList.toggle('on', i < lit); });
-
-        // disciplines
-        var qp = progress(quad);
-        var idx = Math.min(3, Math.floor(qp * 4));
-        qbar.style.width = (qp * 100) + '%';
-        if (idx !== current) {
-          qWords.forEach(function (w, i) {
-            w.classList.toggle('on', i === idx);
-            w.classList.toggle('past', i < idx);
-          });
-          qFacts.forEach(function (f, i) { f.classList.toggle('on', i === idx); });
-          qn.textContent = '0' + (idx + 1);
-          current = idx;
+      // starfield (two depths)
+      function stars(count, rMin, rMax, size, op) {
+        const p = new Float32Array(count * 3);
+        for (let i = 0; i < count; i++) {
+          const r = rMin + Math.random() * (rMax - rMin), th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
+          p.set([r * Math.sin(ph) * Math.cos(th), r * Math.cos(ph) * .6, r * Math.sin(ph) * Math.sin(th)], i * 3);
         }
-
-        // band zoom
-        if (!reduce) bandImg.style.setProperty('--s', (1.25 - progress(band) * .25).toFixed(3));
+        const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(p, 3));
+        return new THREE.Points(g, new THREE.PointsMaterial({ size, map: dot, transparent: true, opacity: op, depthWrite: false, sizeAttenuation: true, fog: false }));
       }
+      const far = stars(1400, 70, 160, .5, .5); scene.add(far);
+      const near = stars(500, 30, 70, .22, .35); world.add(near);
 
-      var ticking = false;
-      window.addEventListener('scroll', function () {
-        if (!ticking) { requestAnimationFrame(function () { tick(); ticking = false; }); ticking = true; }
-      }, { passive: true });
-      window.addEventListener('resize', tick);
-      tick();
-    })();
+      // core
+      const lineMat = (o) => new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: o, depthWrite: false });
+      const core = new THREE.Mesh(new THREE.SphereGeometry(.42, 48, 48), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true }));
+      world.add(core);
+      const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: dot, transparent: true, opacity: .25, depthWrite: false }));
+      halo.scale.setScalar(3.2); world.add(halo);
+
+      // orbit rings
+      const ring = (r, o, tiltX, tiltZ) => {
+        const pts = []; for (let i = 0; i <= 256; i++) { const a = i / 256 * Math.PI * 2; pts.push(new THREE.Vector3(Math.cos(a) * r, 0, Math.sin(a) * r)); }
+        const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat(o));
+        l.rotation.x = tiltX; l.rotation.z = tiltZ; return l;
+      };
+      const ringA = ring(9, .16, .18, .05), ringB = ring(14.5, .07, .32, -.12), ringC = ring(4.2, .1, -.1, .2);
+      world.add(ringA, ringB, ringC);
+
+      // areas
+      const labels = $('#labels');
+      const labelItems = [];
+      const addLabel = (obj, html, cls) => { const el = document.createElement('div'); el.className = 'lbl ' + cls; el.innerHTML = html; labels.appendChild(el); const it = { obj, el, cls }; labelItems.push(it); return it; };
+      addLabel(core, 'JBW', 'core');
+
+      const hubs = [];
+      const rand = (s => () => (s = (s * 16807) % 2147483647) / 2147483647)(7);
+      AREAS.forEach((a, i) => {
+        const ang = i / AREAS.length * Math.PI * 2 + .55;
+        const pos = new THREE.Vector3(Math.cos(ang) * 9, 0, Math.sin(ang) * 9).applyEuler(ringA.rotation);
+        const g = new THREE.Group(); g.position.copy(pos); world.add(g);
+        const hub = new THREE.Mesh(new THREE.SphereGeometry(.2, 32, 32), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true }));
+        g.add(hub);
+        const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: dot, transparent: true, opacity: .18, depthWrite: false })); glow.scale.setScalar(1.6); g.add(glow);
+        const hit = new THREE.Mesh(new THREE.SphereGeometry(1.3, 12, 12), new THREE.MeshBasicMaterial({ visible: false })); hit.userData.id = a.id; g.add(hit);
+        // spoke to core
+        const spoke = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), pos.clone().multiplyScalar(-1)]), lineMat(.12)); g.add(spoke);
+        // leaves
+        const leafPts = [], leafLines = [], leafLbls = [];
+        a.leaves.forEach((name, j) => {
+          const th = j / a.leaves.length * Math.PI * 2 + rand() * .5, r = 1.9 + rand() * 1.1, y = (rand() - .5) * 2.2;
+          const p = new THREE.Vector3(Math.cos(th) * r, y, Math.sin(th) * r);
+          leafPts.push(p);
+          const m = new THREE.Mesh(new THREE.SphereGeometry(.06, 12, 12), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: .8 }));
+          m.position.copy(p); g.add(m);
+          leafLines.push(new THREE.Vector3(), p);
+          leafLbls.push(addLabel(m, name, 'leaf'));
+        });
+        const lines = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(leafLines), lineMat(.22)); g.add(lines);
+        // faint web between leaves
+        const web = []; leafPts.forEach((p, j) => web.push(p, leafPts[(j + 1) % leafPts.length]));
+        const webL = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(web), lineMat(.06)); g.add(webL);
+        const lbl = addLabel(hub, `<span class="mono n">${a.n}</span><span class="t">${a.t}</span>`, 'hub');
+        lbl.el.addEventListener('click', () => openArea(a.id));
+        lbl.el.addEventListener('pointerenter', () => setHot(a.id)); lbl.el.addEventListener('pointerleave', () => setHot(null));
+        hubs.push({ a, g, hub, glow, hit, lines, webL, spoke, leafLbls, phase: rand() * 6.28 });
+      });
+
+      // ---------- camera rig ----------
+      const home = { pos: new THREE.Vector3(0, 7.5, 27), look: new THREE.Vector3(0, -.6, 0) };
+      const camPos = new THREE.Vector3(0, 30, 90), camLook = home.look.clone();
+      const want = { pos: home.pos.clone(), look: home.look.clone() };
+      camera.position.copy(camPos);
+      let focusId = null, hotId = null;
+      function setHot(id) { hotId = id; labelItems.forEach(it => it.cls === 'hub' && it.el.classList.toggle('hot', false)); }
+
+      onFocus = (id) => {
+        focusId = AREAS.some(a => a.id === id) ? id : null;
+        if (!focusId) { want.pos.copy(home.pos); want.look.copy(home.look); return; }
+      };
+
+      // ---------- interaction ----------
+      const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(), par = new THREE.Vector2(), parT = new THREE.Vector2();
+      let down = null, dragRot = 0, dragVel = 0;
+      canvas.addEventListener('pointermove', e => {
+        mouse.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+        parT.set(mouse.x, mouse.y);
+        if (down) { const dx = e.clientX - down.x; dragVel = dx * .004; dragRot += dragVel; down.x = e.clientX; down.moved += Math.abs(dx); }
+        ray.setFromCamera(mouse, camera);
+        const hit = ray.intersectObjects(hubs.map(h => h.hit))[0];
+        hotId = hit ? hit.object.userData.id : null;
+        canvas.style.cursor = hotId ? 'pointer' : (down ? 'grabbing' : 'grab');
+      });
+      canvas.addEventListener('pointerdown', e => { down = { x: e.clientX, moved: 0 }; canvas.setPointerCapture(e.pointerId); });
+      canvas.addEventListener('pointerup', e => {
+        const click = down && down.moved < 6; down = null;
+        if (!click) return;
+        mouse.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+        ray.setFromCamera(mouse, camera);
+        const hit = ray.intersectObjects(hubs.map(h => h.hit))[0];
+        if (hit) openArea(hit.object.userData.id); else if (current) closeArea();
+      });
+
+      // ---------- resize ----------
+      function resize() {
+        const w = innerWidth, h = innerHeight;
+        renderer.setSize(w, h, false); camera.aspect = w / h;
+        camera.fov = w < 760 ? 58 : 42; camera.updateProjectionMatrix();
+        home.pos.set(0, isSmall() ? 10 : 7.5, isSmall() ? 34 : 27);
+        if (!focusId) want.pos.copy(home.pos);
+      }
+      addEventListener('resize', resize); resize();
+
+      // ---------- loop ----------
+      const clockT = new THREE.Clock(); const v = new THREE.Vector3(); const tmp = new THREE.Vector3();
+      let spin = 0; const viewOff = { x: 0, y: 0 };
+      function frame() {
+        const dt = Math.min(clockT.getDelta(), .05), t = clockT.elapsedTime;
+        if (!reduce && !focusId) spin += dt * .035;
+        if (!down) { dragVel *= .94; dragRot += dragVel * (reduce ? 0 : 1) * .2; }
+        world.rotation.y = spin + dragRot;
+        par.lerp(parT, .04);
+        far.rotation.y = -spin * .3;
+
+        // per-hub motion and emphasis
+        hubs.forEach(h => {
+          const isF = focusId === h.a.id, dim = focusId && !isF, hot = hotId === h.a.id;
+          h.g.position.y = (reduce ? 0 : Math.sin(t * .6 + h.phase) * .25) + (h.baseY ??= h.g.position.y);
+          h.g.rotation.y += reduce ? 0 : dt * (isF ? .12 : .05);
+          const s = THREE.MathUtils.lerp(h.hub.scale.x, isF ? 1.1 : hot ? 1.5 : 1, .12); h.hub.scale.setScalar(s);
+          h.hub.material.opacity = THREE.MathUtils.lerp(h.hub.material.opacity, dim ? .25 : 1, .08);
+          h.lines.material.opacity = THREE.MathUtils.lerp(h.lines.material.opacity, dim ? .04 : (isF ? .5 : .2), .08);
+          h.webL.material.opacity = THREE.MathUtils.lerp(h.webL.material.opacity, dim ? .02 : (isF ? .16 : .06), .08);
+          h.glow.material.opacity = THREE.MathUtils.lerp(h.glow.material.opacity, isF ? .22 : hot ? .4 : .18, .1);
+          h.leafLbls.forEach(l => l.show = isF || (hot && !focusId));
+          h.dim = dim;
+        });
+
+        core.material.opacity = THREE.MathUtils.lerp(core.material.opacity, focusId ? .3 : 1, .06);
+        halo.material.opacity = THREE.MathUtils.lerp(halo.material.opacity, focusId ? .06 : .25, .06);
+        // camera target
+        if (focusId) {
+          const h = hubs.find(h => h.a.id === focusId);
+          h.g.getWorldPosition(tmp);
+          const out = tmp.clone().setY(0).normalize();
+          want.look.copy(tmp);
+          want.pos.copy(tmp).add(out.multiplyScalar(isSmall() ? 9.5 : 9)).add(new THREE.Vector3(0, 2.2, 0));
+        }
+        // shift the projection so the focused cluster sits in the space the panel leaves free
+        const pw = panel.getBoundingClientRect();
+        const wantOX = focusId && !isSmall() ? pw.width / 2 : 0;
+        const wantOY = focusId && isSmall() ? pw.height / 2 : 0;
+        viewOff.x += (wantOX - viewOff.x) * (reduce ? 1 : .06);
+        viewOff.y += (wantOY - viewOff.y) * (reduce ? 1 : .06);
+        camera.setViewOffset(innerWidth, innerHeight, viewOff.x, viewOff.y, innerWidth, innerHeight);
+        const k = reduce ? 1 : 1 - Math.pow(.0015, dt);
+        camPos.lerp(want.pos, k * .55); camLook.lerp(want.look, k * .55);
+        camera.position.copy(camPos).add(new THREE.Vector3(par.x * 1.2, par.y * .8, 0));
+        camera.lookAt(camLook);
+
+        renderer.render(scene, camera);
+
+        // labels
+        const w = innerWidth, hgt = innerHeight;
+        labelItems.forEach(it => {
+          it.obj.getWorldPosition(v); v.project(camera);
+          const vis = v.z < 1 && Math.abs(v.x) < 1.15 && Math.abs(v.y) < 1.15;
+          const x = (v.x * .5 + .5) * w, y = (-v.y * .5 + .5) * hgt;
+          if (it.cls === 'core') it.el.style.transform = `translate(${x - 14}px, ${y + 14}px)`;
+          else it.el.style.transform = `translate(${x + (it.cls === 'hub' ? 14 : 8)}px, ${y - (it.cls === 'hub' ? 20 : 8)}px)`;
+          let op = vis ? 1 : 0;
+          if (it.cls === 'leaf') op = vis && it.show ? 1 : 0;
+          if (it.cls === 'hub') { const h = hubs.find(h => h.hub === it.obj); if (h && h.dim) op = .25; if (h && focusId === h.a.id) op = 0; }
+          if (it.cls === 'core' && focusId) op = 0;
+          it.el.style.opacity = op;
+        });
+        requestAnimationFrame(frame);
+      }
+      // leaf labels need a .show flag
+      labelItems.forEach(it => it.show = false);
+      hubs.forEach(h => h.leafLbls.forEach(l => l.show = false));
+      frame();
+      setTimeout(() => document.body.classList.add('ready'), reduce ? 0 : 700);
+    }
+
+    const initial = location.hash.slice(1);
+    if (initial) setTimeout(() => openArea(initial, false), 900);
   </script>
 </body>
 </html>
