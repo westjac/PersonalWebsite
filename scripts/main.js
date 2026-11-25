@@ -88,7 +88,7 @@ const app = Vue.createApp({
       // list of tools items to loop through it
       toolsItems: [
         {
-          imgUrl: '/assets/images/skills/WEBPACK.png',
+          imgUrl: '/assets/images/skills/webpack.png',
           title: 'Webpack'
         }, {
           imgUrl: '/assets/images/skills/git.png',
